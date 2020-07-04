@@ -1,0 +1,12 @@
+{
+	"scripts": {
+		"start": "yarn snowpack dev",
+		"build": "yarn snowpack build"
+	},
+	"devDependencies": {
+		"snowpack": "^2.6.3"
+	},
+	"dependencies": {
+		"three": "^0.118.3"
+	}
+}
