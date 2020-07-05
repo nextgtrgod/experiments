@@ -221,7 +221,7 @@ class Sketch3D {
 	// }
 
 	update() {
-		// requestAnimationFrame(() => this.update())
+		requestAnimationFrame(() => this.update())
 
 		this.segments.forEach(({ container }) => {
 			if (container.position.z >= size)
