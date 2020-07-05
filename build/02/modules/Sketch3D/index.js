@@ -1,5 +1,5 @@
-import {Scene, PerspectiveCamera, WebGLRenderer, Fog, SpotLight, HemisphereLight} from "/web_modules/three.js";
-import {WEBGL} from "/web_modules/three/examples/jsm/WebGL.js";
+import {Scene, PerspectiveCamera, WebGLRenderer, Fog, SpotLight, HemisphereLight} from "/experiments/web_modules/three.js";
+import {WEBGL} from "/experiments/web_modules/three/examples/jsm/WebGL.js";
 import Landscape2 from "./Landscape.js";
 import {size, count, speed} from "./config.js";
 class Sketch3D {

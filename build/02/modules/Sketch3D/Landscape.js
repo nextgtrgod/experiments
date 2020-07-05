@@ -1,4 +1,4 @@
-import {Vector3, LineBasicMaterial, MeshPhongMaterial, PlaneGeometry, LineSegments, Mesh, Object3D, BufferGeometry, BufferAttribute} from "/web_modules/three.js";
+import {Vector3, LineBasicMaterial, MeshPhongMaterial, PlaneGeometry, LineSegments, Mesh, Object3D, BufferGeometry, BufferAttribute} from "/experiments/web_modules/three.js";
 import {n, gap, size} from "./config.js";
 import rnd from "../../utils/random.js";
 let random2 = rnd.seed(42);
