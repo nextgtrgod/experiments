@@ -64,6 +64,7 @@ class Sketch3D {
     this.renderer.setSize(window.innerWidth, H);
   }
   update() {
+    requestAnimationFrame(() => this.update());
     this.segments.forEach(({container}) => {
       if (container.position.z >= size)
         container.position.z = -1 * size * (count - 1);
