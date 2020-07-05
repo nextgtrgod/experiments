@@ -1,7 +1,8 @@
 {
 	"scripts": {
 		"start": "yarn snowpack dev",
-		"build": "yarn snowpack build"
+		"build": "yarn snowpack build",
+		"deploy": "./deploy.sh"
 	},
 	"devDependencies": {
 		"snowpack": "^2.6.3"

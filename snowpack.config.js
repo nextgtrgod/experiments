@@ -1,6 +1,5 @@
 module.exports = {
 	scripts: {
-		'run:css': 'postcss',
 		'mount:*': 'mount . --to /',
 		'build:css': 'postcss',
 	},
