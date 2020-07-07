@@ -1,14 +1,10 @@
-// import getGpu from '@/utils/getGpu'
-
-import { create, draw } from './draw'
+import rnd from '../../utils/random'
+import Dot from './Dot'
 
 class Sketch {
 	constructor(canvas) {
 		this.canvas = canvas
 		this.dpi = window.devicePixelRatio
-
-		// let gpu = getGpu()
-		// console.log(gpu)
 
 		this.init()
 
@@ -21,25 +17,87 @@ class Sketch {
 	}
 
 	init() {
-		let W = window.innerWidth * this.dpi
-		let H = window.innerHeight * this.dpi
+		this.W = window.innerWidth * this.dpi
+		this.H = window.innerHeight * this.dpi
 
-		let options = { W, H, dpi: this.dpi }
-
-		this.canvas.width = W
-		this.canvas.height = H
+		this.canvas.width = this.W
+		this.canvas.height = this.H
 
 		cancelAnimationFrame(this.radId)
 
-		let ctx = this.canvas.getContext('2d', { alpha: false })
-		create(options)
-		this.update(ctx, options)
+		this.ctx = this.canvas.getContext('2d', { alpha: false })
+
+		this.createDots()
 	}
 
-	update(...args) {
-		this.radId = requestAnimationFrame(() => this.update(...args))
+	createDots() {
+		this.dots = []
 
-		draw(...args)
+		let count = 16
+		let speed = 2
+		this.threshold = this.W / 3
+
+		const PI = Math.PI
+	
+		for (let i = 0; i < count; i++) {
+	
+			let s = rnd.range(.5, speed) * this.dpi
+	
+			let limit = PI/12
+			let angle = rnd.from([
+				rnd.range(limit, PI/2 - limit),
+				rnd.range(PI/2 + limit, PI - limit),
+				rnd.range(PI + limit, 1.5*PI - limit),
+				rnd.range(1.5*PI + limit, 2*PI - limit),
+			])
+	
+			this.dots.push(
+				new Dot({
+					id: i,
+					x: rnd.range(0, this.W),
+					y: rnd.range(0, this.H),
+					r: rnd.range(6, 10) * this.dpi,
+					v: {
+						x: s * Math.cos(angle),
+						y: s * Math.sin(angle),
+					},
+				})
+			)
+		}
+	}
+
+	draw() {
+		// clear canvas
+		this.ctx.fillStyle = '#000'
+		this.ctx.fillRect(0, 0, this.W, this.H)
+	
+		for (let i = 0; i < this.dots.length; i++) {
+	
+			this.dots[i].update(this.ctx, this.W, this.H, this.dots, this.threshold)
+	
+			for (let id in this.dots[i].lines) {
+				this.ctx.beginPath()
+				this.ctx.moveTo(this.dots[i].lines[id][0].x, this.dots[i].lines[id][0].y)
+				this.ctx.lineTo(this.dots[i].lines[id][1].x, this.dots[i].lines[id][1].y)
+	
+				this.ctx.strokeStyle = `rgba(240, 240, 240, ${this.dots[i].lines[id].alpha})`
+				this.ctx.lineWidth = this.dots[i].lines[id].width
+				this.ctx.stroke()
+			}
+		}
+	}
+
+	update() {
+		this.radId = requestAnimationFrame(() => this.update())
+		this.draw()
+	}
+
+	start() {
+		this.update()
+	}
+
+	stop() {
+		cancelAnimationFrame(this.radId)
 	}
 }
 

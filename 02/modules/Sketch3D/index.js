@@ -49,8 +49,6 @@ class Sketch3D {
 
 		window.addEventListener('resize', this.setSize)
 		this.setSize()
-
-		this.update()
 	}
 
 	createCamera() {
@@ -220,9 +218,7 @@ class Sketch3D {
 	// 	console.table({ vendor, renderer })
 	// }
 
-	update() {
-		requestAnimationFrame(() => this.update())
-
+	draw() {
 		this.segments.forEach(({ container }) => {
 			if (container.position.z >= size)
 				container.position.z = -1 * size * (count - 1)
@@ -236,6 +232,19 @@ class Sketch3D {
 
 		this.renderer.render(this.scene, this.camera)
 		// this.composer.render( this.renderer )
+	}
+
+	update() {
+		this.radId = requestAnimationFrame(() => this.update())
+		this.draw()
+	}
+
+	start() {
+		this.update()
+	}
+
+	stop() {
+		cancelAnimationFrame(this.radId)
 	}
 }
 

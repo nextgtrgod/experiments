@@ -1,16 +1,7 @@
-
 @font-face {
-	font-family: 'jura';
-	src: url('../assets/fonts/jura/regular.woff2') format('woff2'),
-		 url('../assets/fonts/jura/regular.woff') format('woff');
-	font-weight: 400;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: 'jura';
-	src: url('../assets/fonts/jura/bold.woff2') format('woff2'),
-		 url('../assets/fonts/jura/bold.woff') format('woff');
+	font-family: 'roboto';
+	src: url('../assets/fonts/roboto/bold.woff2') format('woff2'),
+		 url('../assets/fonts/roboto/bold.woff') format('woff');
 	font-weight: 700;
 	font-style: normal;
 }

@@ -1,6 +1,0 @@
-{
-  "imports": {
-    "three": "./three.js",
-    "three/examples/jsm/WebGL.js": "./three/examples/jsm/WebGL.js"
-  }
-}
