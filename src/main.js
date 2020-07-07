@@ -17,7 +17,7 @@ frames.forEach(frame => {
 })
 
 
-let links = [...document.getElementsByClassName('link')]
+let links = [...document.getElementsByClassName('experiment')]
 
 links.forEach(el => {
 	VanillaTilt.init(el, {

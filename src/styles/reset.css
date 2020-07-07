@@ -22,23 +22,11 @@ ul {
 	list-style: none;
 }
 
-input, button, select {
-	margin: 0;
-	padding: 0;
-	font: inherit;
-	color: inherit;
-	line-height: normal;
-	background-color: transparent;
-	border: none;
-	border-radius: 0;
-	outline: none;
-}
-
 button {
 	cursor: pointer;
 }
 
-h1, h2, h3, h4 {
+h1, h2 {
 	margin: 0;
 	line-height: 1;
 }

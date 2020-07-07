@@ -8,12 +8,12 @@ let W = 0
 let H = 0
 let scrollTop = 0
 
-onmessage = e => {
-	let { event, options } = e.data;
+onmessage = ({ data }) => {
+	let { event, options } = data;
 
 	({
 		'init': () => {
-			canvas = e.data.canvas;
+			canvas = data.canvas;
 
 			({ W, H, scrollTop }) = options
 
@@ -22,6 +22,8 @@ onmessage = e => {
 		
 			ctx = canvas.getContext('2d', { alpha: false, desynchronized: true })
 			start()
+
+			postMessage({ event: 'ready' })
 		},
 
 		'resize': () => {

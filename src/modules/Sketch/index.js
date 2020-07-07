@@ -35,8 +35,6 @@ class Sketch {
 		W = window.innerWidth * dpi
 		H = window.innerHeight * dpi
 
-		let options = { W, H, scrollTop }
-
 		if ('transferControlToOffscreen' in this.canvas) {
 			this.worker = new Worker('./src/modules/Sketch/worker.js', { type: 'module' })
 
@@ -45,18 +43,26 @@ class Sketch {
 			this.worker.postMessage({
 				event: 'init',
 				canvas: offscreen,
-				options,
+				options: { W, H, scrollTop },
 			}, [ offscreen ])
+
+			this.worker.onmessage = ({ data }) => {
+				if (data.event === 'ready') this.showCanvas()
+			}
 
 		} else {
 			this.canvas.width = W
 			this.canvas.height = H
 
-			cancelAnimationFrame(this.radId)
+			this.ctx = this.canvas.getContext('2d', { alpha: false })
 
-			let ctx = this.canvas.getContext('2d', { alpha: false })
-			this.update(ctx, options)
+			this.start()
+			this.showCanvas()
 		}
+	}
+
+	showCanvas() {
+		this.canvas.classList.add('loaded')
 	}
 
 	resize() {
@@ -73,9 +79,9 @@ class Sketch {
 		this.canvas.height = H
 	}
 
-	update(...args) {
-		this.radId = requestAnimationFrame(() => this.update(...args))
-		draw(...args)
+	update() {
+		this.radId = requestAnimationFrame(() => this.update())
+		draw(this.ctx, { W, H, scrollTop })
 	}
 
 	start() {
