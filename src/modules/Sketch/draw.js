@@ -5,23 +5,31 @@ let draw = (ctx, { W, H, scrollTop = 0 }) => {
 	ctx.fillRect(0, 0, W, H)
 
 	let gap = W / 10
-	let offset = scrollTop / 4
+	let dY = scrollTop / 4
 
 	ctx.fillStyle = '#000'
 	ctx.beginPath()
 
-	for (let i = 0; i < 120; i++) {
-		ctx.moveTo(i*gap, 0)
-		ctx.lineTo(i*gap, H)
+	for (let i = 0; i < 10; i++) {
+		// horizontal
+		let offset = i*gap
+		let y = offset + dY
 
-		ctx.moveTo(0, i*gap + offset)
-		ctx.lineTo(W, i*gap + offset)
+		ctx.moveTo(0, y)
+		ctx.lineTo(W, y)
+
+		// vertical
+		ctx.moveTo(offset, 0)
+		ctx.lineTo(offset, H)
 	}
 
 	ctx.stroke()
 
-	ctx.moveTo(200, 200)
-	ctx.arc(0, 0 + -offset * 2, 1000, 0, 2*Math.PI)
+	let dpi = 2
+	let r = (W - 900 * dpi) / 2 + 300 * dpi
+
+	ctx.moveTo(0, 0)
+	ctx.arc(0, -2*dY, r, 0, 2*Math.PI)
 	ctx.fillStyle = '#FFDC4E'
 	ctx.fill()
 }

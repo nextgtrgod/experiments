@@ -5,6 +5,8 @@ let frames = [...document.getElementsByTagName('iframe')]
 
 frames.forEach(frame => {
 	frame.addEventListener('load', () => {
+		frame.classList.add('loaded')
+
 		frame.parentNode.addEventListener('mouseenter', () => {
 
 			frame.contentWindow.sketch.start()
