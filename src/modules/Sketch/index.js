@@ -3,7 +3,7 @@ import draw from './draw'
 const dpi = window.devicePixelRatio
 let W = window.innerWidth * dpi
 let H = window.innerHeight * dpi
-let scrollTop = document.body.scrollTop
+let scrollTop = (document.body.scrollTop * dpi) / 4
 
 class Sketch {
 	constructor(canvas) {
@@ -20,7 +20,7 @@ class Sketch {
 		}
 
 		document.body.addEventListener('scroll', () => {
-			scrollTop = document.body.scrollTop
+			scrollTop = (document.body.scrollTop * dpi) / 4
 
 			if (this.worker)
 				this.worker.postMessage({
@@ -43,7 +43,7 @@ class Sketch {
 			this.worker.postMessage({
 				event: 'init',
 				canvas: offscreen,
-				options: { W, H, scrollTop },
+				options: { W, H, dpi, scrollTop },
 			}, [ offscreen ])
 
 			this.worker.onmessage = ({ data }) => {
@@ -81,7 +81,7 @@ class Sketch {
 
 	update() {
 		this.radId = requestAnimationFrame(() => this.update())
-		draw(this.ctx, { W, H, scrollTop })
+		draw(this.ctx, { W, H, dpi, scrollTop })
 	}
 
 	start() {

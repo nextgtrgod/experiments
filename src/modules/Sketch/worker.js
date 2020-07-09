@@ -6,7 +6,9 @@ let rafId = null
 
 let W = 0
 let H = 0
+let dpi = 1
 let scrollTop = 0
+let timer = null
 
 onmessage = ({ data }) => {
 	let { event, options } = data;
@@ -15,13 +17,13 @@ onmessage = ({ data }) => {
 		'init': () => {
 			canvas = data.canvas;
 
-			({ W, H, scrollTop }) = options
+			({ W, H, dpi, scrollTop }) = options
 
 			canvas.width = W
 			canvas.height = H
 		
 			ctx = canvas.getContext('2d', { alpha: false, desynchronized: true })
-			start()
+			draw(ctx, { W, H, dpi, scrollTop })
 
 			postMessage({ event: 'ready' })
 		},
@@ -31,16 +33,24 @@ onmessage = ({ data }) => {
 
 			canvas.width = W
 			canvas.height = H
+
+			if (!rafId) draw(ctx, { W, H, dpi, scrollTop })
 		},
 
 		'scroll': () => {
 			scrollTop = options.scrollTop
+
+			if (!rafId) start()
+
+			clearTimeout(timer)
+			timer = setTimeout(stop, 250)
 		},
 	})[event]()
 }
 
 let stop = () => {
 	cancelAnimationFrame(rafId)
+	rafId = null
 }
 
 let start = () => {
@@ -50,5 +60,5 @@ let start = () => {
 
 let update = () => {
 	rafId = requestAnimationFrame(() => update())
-	draw(ctx, { W, H, scrollTop })
+	draw(ctx, { W, H, dpi, scrollTop })
 }

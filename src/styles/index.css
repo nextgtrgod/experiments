@@ -62,31 +62,21 @@ header {
 	}
 
 	& img {
-		width: 70px;
+		width: 64px;
 	}
 }
-
 
 h1 {
 	font-size: 32px;
 }
 
-h2 {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	margin: auto;
-	color: #FFF;
-	font-size: 80px;
-	line-height: .75;
 
-	@media (min-width: 720px) {
-		font-size: 200px;
-	}
+ul {
+	counter-reset: list;
 }
 
-
 li {
+	display: flex;
 	padding: 20px 0;
 	font-size: 0;
 
@@ -104,8 +94,6 @@ a.experiment {
 	position: relative;
 	width: 100%;
 	max-width: 600px;
-	padding-top: 56.25%;
-	display: inline-block;
 	background-color: #000;
 	box-shadow: 0 0 30px -10px #000;
 
@@ -113,9 +101,29 @@ a.experiment {
 	transform-style: preserve-3d;
 	transform: perspective(1000px);
 
-	& h2 {
+	&:before {
+		content: '';
+		display: block;
+		padding-top: 75%;
+	}
+
+	&:after {
+		counter-increment: list;
+		content: counter(list, decimal-leading-zero);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		margin: auto;
+		color: #FFF;
+		font-size: 80px;
+		line-height: .75;
 		transform: translateZ(100px);
 		pointer-events: none;
+
+		@media (min-width: 720px) {
+			font-size: 200px;
+		}
 	}
 }
 

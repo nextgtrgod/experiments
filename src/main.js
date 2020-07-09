@@ -34,4 +34,3 @@ links.forEach(el => {
 
 let canvas = document.getElementById('bg')
 let sketch = new Sketch(canvas)
-
