@@ -3,11 +3,6 @@ import Sketch from './modules/Sketch'
 let canvas = document.getElementById('canvas')
 let sketch = new Sketch({
 	node: canvas,
-	height: {
-		0: 420,
-		720: 560,
-		960: 820,
-	},
 	// dpi: 1,
 	antialias: true,
 	tryWebGL2: true,

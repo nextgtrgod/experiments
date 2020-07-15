@@ -30,17 +30,17 @@ import Landscape from './Landscape'
 
 import { size, count, speed } from './config'
 
+let W = window.innerWidth
+let H = window.innerHeight
+
 class Sketch3D {
 	constructor({
 			node,
-			height,
 			dpi = window.devicePixelRatio,
 			antialias = false,
 			tryWebGL2 = false,
 		}) {
 		this.canvas = node
-		this.height = height
-		// this.dpi = Math.min(dpi, 2)
 		this.dpi = dpi
 		this.antialias = antialias
 		this.tryWebGL2 = tryWebGL2
@@ -48,13 +48,12 @@ class Sketch3D {
 		this.init()
 
 		window.addEventListener('resize', () => this.setSize())
-		this.setSize()
 	}
 
 	createCamera() {
 		this.camera = new PerspectiveCamera(
 			50,
-			window.innerWidth / this.height,
+			W / H,
 			.1,
 			size * (count - 2),
 		)
@@ -146,6 +145,7 @@ class Sketch3D {
 			alpha: true,
 			powerPreference: 'high-performance',
 		})
+		this.renderer.setSize(W, H)
 		this.renderer.setPixelRatio( this.dpi )
 		// this.renderer.setClearColor( 0x1D0F33 )
 
@@ -195,8 +195,8 @@ class Sketch3D {
 	// }
 
 	setSize() {
-		let W = window.innerWidth
-		let H = window.innerHeight
+		W = window.innerWidth
+		H = window.innerHeight
 
 		this.camera.aspect = W / H
 		this.camera.updateProjectionMatrix()
