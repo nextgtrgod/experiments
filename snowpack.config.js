@@ -11,8 +11,8 @@ module.exports = {
 	},
 	buildOptions: {
 		clean: true,
-		// baseUrl: process.env.NODE_ENV === 'production'
-		// 	? `/${path.basename(process.cwd())}/`
-		// 	: '/',
+		baseUrl: process.env.NODE_ENV === 'production'
+			? `/${path.basename(process.cwd())}/`
+			: '/',
 	},
 }

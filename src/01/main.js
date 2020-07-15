@@ -14,12 +14,13 @@ let isIframe = (() => {
 if (isIframe) {
 	sketch.draw()
 
-	let origin = import.meta.env.MODE === 'development'
-		? 'http://localhost:8080'
-		: 'https://nextgtrgod.github.io/experiments'
+	let trusted = [
+		'http://localhost:8080',
+		'https://nextgtrgod.github.io/experiments'
+	]
 
 	window.addEventListener('message', e => {
-		if (e.origin !== origin) return
+		if (!trusted.includes(e.origin)) return
 		
 		switch (e.data) {
 			case 'start':
@@ -27,6 +28,7 @@ if (isIframe) {
 				break;
 			case 'stop':
 				sketch.stop()
+				break;
 		}
 	})
 } else sketch.update()

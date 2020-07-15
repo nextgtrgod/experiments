@@ -1,1 +1,0 @@
-export default "/02/modules/shaders/shaders/fragment.glsl";
