@@ -12,11 +12,11 @@ frames.forEach(frame => {
 		if (!hover) return
 
 		frame.parentNode.addEventListener('mouseenter', () => {
-			frame.contentWindow.sketch.start()
+			frame.contentWindow.postMessage('start')
 		})
 
 		frame.parentNode.addEventListener('mouseleave', () => {
-			frame.contentWindow.sketch.stop()
+			frame.contentWindow.postMessage('stop')
 		})
 	})
 })

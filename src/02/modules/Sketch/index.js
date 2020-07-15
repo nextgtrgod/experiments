@@ -18,7 +18,7 @@ import { WEBGL } from 'three/examples/jsm/WebGL.js'
 // import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
 // import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js'
 // import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-// import { TiltShift } from '@/shaders/TiltShift'
+// import { TiltShift } from '../shaders/TiltShift'
 // import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
 
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -47,7 +47,7 @@ class Sketch3D {
 
 		this.init()
 
-		window.addEventListener('resize', this.setSize)
+		window.addEventListener('resize', () => this.setSize())
 		this.setSize()
 	}
 
@@ -195,18 +195,15 @@ class Sketch3D {
 	// }
 
 	setSize() {
-		let H = Object.keys(this.height).reduce((s, key) => (
-			s = window.innerWidth >= key
-				? this.height[key]
-				: s
-		), 0)
+		let W = window.innerWidth
+		let H = window.innerHeight
 
-		this.camera.aspect = window.innerWidth / H
+		this.camera.aspect = W / H
 		this.camera.updateProjectionMatrix()
 
 		// TiltShift.uniforms.iResolution.value.set(window.innerWidth, H, 1)
 
-		this.renderer.setSize(window.innerWidth, H)
+		this.renderer.setSize(W, H)
 		// this.composer.setSize(window.innerWidth, H)
 	}
 
