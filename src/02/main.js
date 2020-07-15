@@ -26,7 +26,7 @@ if (isIframe) {
 
 	let trusted = [
 		'http://localhost:8080',
-		'https://nextgtrgod.github.io/experiments'
+		'https://nextgtrgod.github.io',
 	]
 
 	window.addEventListener('message', e => {
