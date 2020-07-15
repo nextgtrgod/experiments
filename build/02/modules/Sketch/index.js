@@ -10,7 +10,7 @@ class Sketch3D {
     this.antialias = antialias;
     this.tryWebGL2 = tryWebGL2;
     this.init();
-    window.addEventListener("resize", this.setSize);
+    window.addEventListener("resize", () => this.setSize());
     this.setSize();
   }
   createCamera() {
@@ -57,10 +57,11 @@ class Sketch3D {
     this.renderer.setPixelRatio(this.dpi);
   }
   setSize() {
-    let H = Object.keys(this.height).reduce((s, key) => s = window.innerWidth >= key ? this.height[key] : s, 0);
-    this.camera.aspect = window.innerWidth / H;
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+    this.camera.aspect = W / H;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, H);
+    this.renderer.setSize(W, H);
   }
   draw() {
     this.segments.forEach(({container}) => {
