@@ -1,13 +1,10 @@
 const path = require('path')
 
-console.log('here', process.env.NODE_ENV)
-
 module.exports = {
 	scripts: {
-		'mount:*': 'mount . --to /',
+		'mount:*': 'mount ./src --to /',
 		'build:css': 'postcss',
 	},
-	exclude: ['/.git/'],
 	devOptions: {
 		port: 8080,
 		open: 'none',

@@ -36,7 +36,7 @@ class Sketch {
 		H = window.innerHeight * dpi
 
 		if ('transferControlToOffscreen' in this.canvas) {
-			this.worker = new Worker('./src/modules/Sketch/worker.js', { type: 'module' })
+			this.worker = new Worker('./modules/Sketch/worker.js', { type: 'module' })
 
 			let offscreen = this.canvas.transferControlToOffscreen()
 

@@ -14,6 +14,9 @@ body {
 	grid-template-columns: minmax(20px, auto) minmax(auto, 900px) minmax(20px, auto);
 	grid-template-rows: auto;
 
+	padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-right);
+
 	color: var(--color-text);
 	font-family: var(--font);
 	background-color: var(--color-bg);
@@ -53,6 +56,7 @@ header {
 
 	& a {
 		font-size: 0;
+		user-select: none;
 		transform: scale(.99);
 		transition: transform .2s;
 
