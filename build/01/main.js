@@ -24,4 +24,4 @@ if (isIframe) {
     }
   });
 } else
-  sketch.update();
+  sketch.start();

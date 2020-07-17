@@ -1,8 +1,9 @@
 import draw2 from "./draw.js";
+import clamp2 from "../../utils/clamp.js";
 const dpi = window.devicePixelRatio;
 let W = window.innerWidth * dpi;
 let H = window.innerHeight * dpi;
-let scrollTop = document.body.scrollTop * dpi / 4;
+let scrollY = window.scrollY * dpi / 4;
 class Sketch {
   constructor(canvas) {
     this.canvas = canvas;
@@ -13,15 +14,15 @@ class Sketch {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => this.resize(), 150);
     };
-    document.body.addEventListener("scroll", () => {
-      scrollTop = document.body.scrollTop * dpi / 4;
+    window.addEventListener("scroll", () => {
+      scrollY = clamp2(0, window.scrollY * dpi / 4);
       if (this.worker)
         this.worker.postMessage({
           event: "scroll",
           options: {
             W,
             H,
-            scrollTop
+            scrollY
           }
         });
     }, {
@@ -43,7 +44,7 @@ class Sketch {
           W,
           H,
           dpi,
-          scrollTop
+          scrollY
         }
       }, [offscreen]);
       this.worker.onmessage = ({data}) => {
@@ -72,7 +73,7 @@ class Sketch {
         options: {
           W,
           H,
-          scrollTop
+          scrollY
         }
       });
     this.canvas.width = W;
@@ -84,7 +85,7 @@ class Sketch {
       W,
       H,
       dpi,
-      scrollTop
+      scrollY
     });
   }
   start() {

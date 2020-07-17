@@ -5,8 +5,21 @@ let rafId = null;
 let W = 0;
 let H = 0;
 let dpi = 1;
-let scrollTop = 0;
+let grid = {
+  cell: 120,
+  cols: Math.round(W / 120),
+  rows: Math.round(H / 120)
+};
+let scrollY = 0;
 let timer = null;
+let resize = () => {
+  canvas.width = W;
+  canvas.height = H;
+  grid.cols = Math.round(W / grid.cell);
+  grid.rows = Math.round(H / grid.cell);
+  grid.cell = Math.round(W / grid.cols);
+  grid.max = Math.max(grid.cols, grid.rows);
+};
 onmessage = ({data}) => {
   let {event, options} = data;
   ({
@@ -16,10 +29,10 @@ onmessage = ({data}) => {
         W,
         H,
         dpi,
-        scrollTop
+        scrollY
       } = options);
-      canvas.width = W;
-      canvas.height = H;
+      grid.cell *= dpi;
+      resize();
       ctx = canvas.getContext("2d", {
         alpha: false,
         desynchronized: true
@@ -28,7 +41,8 @@ onmessage = ({data}) => {
         W,
         H,
         dpi,
-        scrollTop
+        scrollY,
+        grid
       });
       postMessage({
         event: "ready"
@@ -38,20 +52,20 @@ onmessage = ({data}) => {
       ({
         W,
         H,
-        scrollTop
+        scrollY
       } = options);
-      canvas.width = W;
-      canvas.height = H;
+      resize();
       if (!rafId)
         draw2(ctx, {
           W,
           H,
           dpi,
-          scrollTop
+          grid,
+          scrollY
         });
     },
     scroll: () => {
-      scrollTop = options.scrollTop;
+      scrollY = options.scrollY;
       if (!rafId)
         start();
       clearTimeout(timer);
@@ -73,6 +87,7 @@ let update = () => {
     W,
     H,
     dpi,
-    scrollTop
+    grid,
+    scrollY
   });
 };
