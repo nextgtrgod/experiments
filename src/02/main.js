@@ -36,4 +36,4 @@ if (isIframe) {
 				break;
 		}
 	})
-} else sketch.update()
+} else sketch.start()

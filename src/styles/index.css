@@ -83,6 +83,7 @@ li {
 	display: flex;
 	padding: 20px 0;
 	font-size: 0;
+	transform: translateZ(0px); /* safari fix */
 
 	@media (min-width: 720px) {
 		padding: 40px 0;
@@ -169,6 +170,7 @@ a.credits {
 		background-color: var(--color-accent);
 		transform-origin: 0% 100%;
 		transition: transform .3s;
+		backface-visibility: hidden;
 		z-index: -1;
 	}
 

@@ -1,9 +1,10 @@
 import draw from './draw'
+import clamp from '../../utils/clamp'
 
 const dpi = window.devicePixelRatio
 let W = window.innerWidth * dpi
 let H = window.innerHeight * dpi
-let scrollTop = (document.body.scrollTop * dpi) / 4
+let scrollY = (window.scrollY * dpi) / 4
 
 class Sketch {
 	constructor(canvas) {
@@ -19,13 +20,13 @@ class Sketch {
 			resizeTimer = setTimeout(() => this.resize(), 150)
 		}
 
-		document.body.addEventListener('scroll', () => {
-			scrollTop = (document.body.scrollTop * dpi) / 4
+		window.addEventListener('scroll', () => {
+			scrollY = clamp(0, (window.scrollY * dpi) / 4)
 
 			if (this.worker)
 				this.worker.postMessage({
 					event: 'scroll',
-					options: { W, H, scrollTop },
+					options: { W, H, scrollY },
 				})
 
 		}, { passive: true })
@@ -43,7 +44,7 @@ class Sketch {
 			this.worker.postMessage({
 				event: 'init',
 				canvas: offscreen,
-				options: { W, H, dpi, scrollTop },
+				options: { W, H, dpi, scrollY },
 			}, [ offscreen ])
 
 			this.worker.onmessage = ({ data }) => {
@@ -72,7 +73,7 @@ class Sketch {
 		if (this.worker)
 			return this.worker.postMessage({
 				event: 'resize',
-				options: { W, H, scrollTop }
+				options: { W, H, scrollY }
 			})
 
 		this.canvas.width = W
@@ -81,7 +82,7 @@ class Sketch {
 
 	update() {
 		this.radId = requestAnimationFrame(() => this.update())
-		draw(this.ctx, { W, H, dpi, scrollTop })
+		draw(this.ctx, { W, H, dpi, scrollY })
 	}
 
 	start() {

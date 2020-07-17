@@ -1,36 +1,35 @@
 
-let gap = 0
 let dY = 0
+let speed = 0.25
 
-let draw = (ctx, { W, H, dpi, scrollTop = 0 }) => {
+let draw = (ctx, { W, H, dpi, grid, scrollY = 0 }) => {
 
 	ctx.fillStyle = '#F0F0F0'
 	ctx.fillRect(0, 0, W, H)
 
-	gap = W / 10
-	dY = scrollTop / 4
+	dY = scrollY * speed
 
-	ctx.strokeStyle = 'rgba(0,0,0, .5)'
 	ctx.beginPath()
+	ctx.strokeStyle = 'rgba(0,0,0, .5)'
 
-	for (let i = 0; i < 10; i++) {
+	for (let i = 0; i < grid.max; i++) {
 		// horizontal
-		let offset = i*gap
-		let y = offset + scrollTop
+		let offset = i * grid.cell
+
+		ctx.moveTo(offset, 0)
+		ctx.lineTo(offset, H)
+
+		let y = offset + scrollY
 
 		ctx.moveTo(0, y)
 		ctx.lineTo(W, y)
-
-		// vertical
-		ctx.moveTo(offset, 0)
-		ctx.lineTo(offset, H)
 	}
 	ctx.stroke()
 
 	let r = (W - 900 * dpi) / 2 + 300 * dpi
 
 	ctx.moveTo(0, 0)
-	ctx.arc(0, -1.5*scrollTop, r, 0, 2*Math.PI)
+	ctx.arc(0, -1.5*scrollY, r, 0, 2*Math.PI)
 	ctx.fillStyle = '#FFDC4E'
 	ctx.fill()
 }
