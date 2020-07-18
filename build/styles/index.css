@@ -28,7 +28,7 @@ button {
 	cursor: pointer;
 }
 
-h1, h2 {
+h1 {
 	margin: 0;
 	line-height: 1;
 }
@@ -49,6 +49,12 @@ a {
 		 url('../assets/fonts/roboto/bold.woff') format('woff');
 	font-weight: 700;
 	font-style: normal;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*, ::before, ::after {
+		transition: 0s !important;
+	}
 }
 
 :root {
@@ -111,26 +117,34 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 40px 0
+	padding: 40px 0;
 }
 
-header a {
-		font-size: 0;
-		-webkit-user-select: none;
-		   -moz-user-select: none;
-		    -ms-user-select: none;
-		        user-select: none;
-		transform: scale(.99);
-		transition: transform .2s
-	}
+a.repo {
+	font-size: 0;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	    -ms-user-select: none;
+	        user-select: none;
+	transition: transform .2s
+}
 
-header a:hover {
+@media (hover) {
+		a.repo:hover {
 			transform: scale(1.05);
 		}
-
-header img {
-		width: 64px;
 	}
+
+a.repo img {
+		width: 48px
+	}
+
+@media (min-width: 720px) {
+
+a.repo img {
+			width: 64px
+	}
+		}
 
 h1 {
 	font-size: 32px;
@@ -161,10 +175,9 @@ li:nth-child(2n) {
 
 a.experiment {
 	position: relative;
-	width: 100%;
-	max-width: 600px;
+	width: min(80%, 600px);
 	background-color: #000;
-	box-shadow: 0 0 30px -10px #000;
+	box-shadow: 0 0 40px -10px rgba(0, 0, 0, 0.5);
 
 	/* tilt */
 	transform-style: preserve-3d;

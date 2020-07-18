@@ -1,11 +1,13 @@
 import VanillaTilt from "/experiments/web_modules/vanilla-tilt.js";
 import Sketch2 from "./modules/Sketch/index.js";
-const hover = window.matchMedia("(hover)").matches;
+const hasHover = window.matchMedia("(hover)").matches;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const animate = hasHover && !reduceMotion;
 let frames = [...document.getElementsByTagName("iframe")];
 frames.forEach((frame) => {
   frame.addEventListener("load", () => {
     frame.classList.add("loaded");
-    if (!hover)
+    if (!animate)
       return;
     frame.parentNode.addEventListener("mouseenter", () => {
       frame.contentWindow.postMessage("start");
@@ -15,7 +17,7 @@ frames.forEach((frame) => {
     });
   });
 });
-if (hover) {
+if (animate) {
   let links = [...document.getElementsByClassName("experiment")];
   links.forEach((el) => {
     VanillaTilt.init(el, {

@@ -28,6 +28,7 @@ class Sketch {
     let speed = 2;
     this.threshold = this.W / 3;
     const PI = Math.PI;
+    let scale = window.innerWidth >= 600 ? 2 : 1;
     for (let i = 0; i < count; i++) {
       let s = rnd.range(0.5, speed) * this.dpi;
       let limit = PI / 12;
@@ -36,7 +37,7 @@ class Sketch {
         id: i,
         x: rnd.range(0, this.W),
         y: rnd.range(0, this.H),
-        r: rnd.range(6, 10) * this.dpi,
+        r: rnd.range(3, 5) * scale * this.dpi,
         v: {
           x: s * Math.cos(angle),
           y: s * Math.sin(angle)

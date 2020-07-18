@@ -5,20 +5,13 @@ let rafId = null;
 let W = 0;
 let H = 0;
 let dpi = 1;
-let grid = {
-  cell: 120,
-  cols: Math.round(W / 120),
-  rows: Math.round(H / 120)
-};
 let scrollY = 0;
 let timer = null;
+let grid = null;
+let circle = null;
 let resize = () => {
   canvas.width = W;
   canvas.height = H;
-  grid.cols = Math.round(W / grid.cell);
-  grid.rows = Math.round(H / grid.cell);
-  grid.cell = Math.round(W / grid.cols);
-  grid.max = Math.max(grid.cols, grid.rows);
 };
 onmessage = ({data}) => {
   let {event, options} = data;
@@ -29,9 +22,10 @@ onmessage = ({data}) => {
         W,
         H,
         dpi,
-        scrollY
+        scrollY,
+        grid,
+        circle
       } = options);
-      grid.cell *= dpi;
       resize();
       ctx = canvas.getContext("2d", {
         alpha: false,
@@ -42,7 +36,8 @@ onmessage = ({data}) => {
         H,
         dpi,
         scrollY,
-        grid
+        grid,
+        circle
       });
       postMessage({
         event: "ready"
@@ -52,7 +47,9 @@ onmessage = ({data}) => {
       ({
         W,
         H,
-        scrollY
+        scrollY,
+        grid,
+        circle
       } = options);
       resize();
       if (!rafId)
@@ -60,8 +57,9 @@ onmessage = ({data}) => {
           W,
           H,
           dpi,
+          scrollY,
           grid,
-          scrollY
+          circle
         });
     },
     scroll: () => {
@@ -87,7 +85,8 @@ let update = () => {
     W,
     H,
     dpi,
+    scrollY,
     grid,
-    scrollY
+    circle
   });
 };
