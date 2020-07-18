@@ -1,7 +1,9 @@
 import VanillaTilt from 'vanilla-tilt'
 import Sketch from './modules/Sketch'
 
-const hover = window.matchMedia('(hover)').matches
+const hasHover = window.matchMedia('(hover)').matches
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const animate = hasHover && !reduceMotion
 
 let frames = [...document.getElementsByTagName('iframe')]
 
@@ -9,7 +11,7 @@ frames.forEach(frame => {
 	frame.addEventListener('load', () => {
 		frame.classList.add('loaded')
 
-		if (!hover) return
+		if (!animate) return
 
 		frame.parentNode.addEventListener('mouseenter', () => {
 			frame.contentWindow.postMessage('start')
@@ -22,7 +24,7 @@ frames.forEach(frame => {
 })
 
 // tilt effect
-if (hover) {
+if (animate) {
 	let links = [...document.getElementsByClassName('experiment')]
 	
 	links.forEach(el => {

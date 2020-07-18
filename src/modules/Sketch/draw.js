@@ -13,16 +13,19 @@ let draw = (ctx, { W, H, dpi, grid, scrollY = 0 }) => {
 	ctx.strokeStyle = 'rgba(0,0,0, .5)'
 
 	for (let i = 0; i < grid.max; i++) {
-		// horizontal
 		let offset = i * grid.cell
 
+		// vertical
 		ctx.moveTo(offset, 0)
 		ctx.lineTo(offset, H)
 
-		let y = offset + scrollY
+		// horizontal
+		if (i < grid.rows) {
+			let y = (offset + scrollY) % grid.height
 
-		ctx.moveTo(0, y)
-		ctx.lineTo(W, y)
+			ctx.moveTo(0, y)
+			ctx.lineTo(W, y)
+		}
 	}
 	ctx.stroke()
 

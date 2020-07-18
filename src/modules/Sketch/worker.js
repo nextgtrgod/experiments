@@ -12,6 +12,7 @@ let grid = {
 	cell: 120,
 	cols: Math.round(W / 120),
 	rows: Math.round(H / 120),
+	height: 0,
 }
 
 let scrollY = 0
@@ -25,6 +26,7 @@ let resize = () => {
 	grid.rows = Math.round(H / grid.cell)
 	grid.cell = Math.round(W / grid.cols)
 	grid.max = Math.max(grid.cols, grid.rows)
+	grid.height = grid.rows * grid.cell
 }
 
 onmessage = ({ data }) => {

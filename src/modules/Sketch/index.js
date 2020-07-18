@@ -14,7 +14,6 @@ class Sketch {
 		this.init()
 
 		let resizeTimer = null
-
 		window.onresize = () => {
 			clearTimeout(resizeTimer)
 			resizeTimer = setTimeout(() => this.resize(), 150)

@@ -1,6 +1,10 @@
 # [experiments](https://nextgtrgod.github.io/experiments/)
 
-Experiments with canvas, WebGL, WebAudio, p5.js, etc.
+Experiments with canvas, three.js, pixi.js, raw WebGL, WebAudio etc.
+
+<a href="https://nextgtrgod.github.io/experiments/" target="_blank">
+	<img src="/screenshot.jpg?raw=true">
+</a>
 
 ## Todo
 - [ ] blob
