@@ -110,7 +110,7 @@ a.experiment {
 	position: relative;
 	width: min(80%, 600px);
 	background-color: #000;
-	box-shadow: 0 0 30px -10px #000;
+	box-shadow: 0 0 40px -10px rgb(0 0 0 / 50%);
 
 	/* tilt */
 	transform-style: preserve-3d;

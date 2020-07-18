@@ -1,6 +1,6 @@
 # [experiments](https://nextgtrgod.github.io/experiments/)
 
-Experiments with canvas, three.js, pixi.js, raw WebGL, WebAudio etc.
+Experiments with js frameworks, canvas, three.js, pixi.js, raw WebGL, WebAudio etc.
 
 <a href="https://nextgtrgod.github.io/experiments/" target="_blank">
 	<img src="/screenshot.jpg?raw=true">

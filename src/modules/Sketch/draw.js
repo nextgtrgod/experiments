@@ -1,13 +1,8 @@
 
-let dY = 0
-let speed = 0.25
-
-let draw = (ctx, { W, H, dpi, grid, scrollY = 0 }) => {
+let draw = (ctx, { W, H, dpi, scrollY = 0, grid, circle }) => {
 
 	ctx.fillStyle = '#F0F0F0'
 	ctx.fillRect(0, 0, W, H)
-
-	dY = scrollY * speed
 
 	ctx.beginPath()
 	ctx.strokeStyle = 'rgba(0,0,0, .5)'
@@ -21,7 +16,7 @@ let draw = (ctx, { W, H, dpi, grid, scrollY = 0 }) => {
 
 		// horizontal
 		if (i < grid.rows) {
-			let y = (offset + scrollY) % grid.height
+			let y = (offset + grid.speed * scrollY) % grid.height
 
 			ctx.moveTo(0, y)
 			ctx.lineTo(W, y)
@@ -29,11 +24,9 @@ let draw = (ctx, { W, H, dpi, grid, scrollY = 0 }) => {
 	}
 	ctx.stroke()
 
-	let r = (W - 900 * dpi) / 2 + 300 * dpi
-
 	ctx.moveTo(0, 0)
-	ctx.arc(0, -1.5*scrollY, r, 0, 2*Math.PI)
-	ctx.fillStyle = '#FFDC4E'
+	ctx.arc(circle.x, circle.speed * scrollY, circle.r, 0, 2*Math.PI)
+	ctx.fillStyle = circle.fill
 	ctx.fill()
 }
 

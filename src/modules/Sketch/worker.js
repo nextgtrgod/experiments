@@ -7,26 +7,15 @@ let rafId = null
 let W = 0
 let H = 0
 let dpi = 1
-
-let grid = {
-	cell: 120,
-	cols: Math.round(W / 120),
-	rows: Math.round(H / 120),
-	height: 0,
-}
-
 let scrollY = 0
 let timer = null
+
+let grid = null
+let circle = null
 
 let resize = () => {
 	canvas.width = W
 	canvas.height = H
-
-	grid.cols = Math.round(W / grid.cell)
-	grid.rows = Math.round(H / grid.cell)
-	grid.cell = Math.round(W / grid.cols)
-	grid.max = Math.max(grid.cols, grid.rows)
-	grid.height = grid.rows * grid.cell
 }
 
 onmessage = ({ data }) => {
@@ -36,24 +25,22 @@ onmessage = ({ data }) => {
 		'init': () => {
 			canvas = data.canvas;
 
-			({ W, H, dpi, scrollY }) = options
-
-			grid.cell *= dpi
+			({ W, H, dpi, scrollY, grid, circle }) = options
 
 			resize()
 		
 			ctx = canvas.getContext('2d', { alpha: false, desynchronized: true })
-			draw(ctx, { W, H, dpi, scrollY, grid })
+			draw(ctx, { W, H, dpi, scrollY, grid, circle })
 
 			postMessage({ event: 'ready' })
 		},
 
 		'resize': () => {
-			({ W, H, scrollY }) = options
+			({ W, H, scrollY, grid, circle }) = options
 
 			resize()
 
-			if (!rafId) draw(ctx, { W, H, dpi, grid, scrollY })
+			if (!rafId) draw(ctx, { W, H, dpi, scrollY, grid, circle })
 		},
 
 		'scroll': () => {
@@ -79,5 +66,5 @@ let start = () => {
 
 let update = () => {
 	rafId = requestAnimationFrame(() => update())
-	draw(ctx, { W, H, dpi, grid, scrollY })
+	draw(ctx, { W, H, dpi, scrollY, grid, circle })
 }
