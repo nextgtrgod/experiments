@@ -5,7 +5,7 @@ let draw = (ctx, { W, H, dpi, scrollY = 0, grid, circle }) => {
 	ctx.fillRect(0, 0, W, H)
 
 	ctx.beginPath()
-	ctx.strokeStyle = 'rgba(0,0,0, .5)'
+	ctx.strokeStyle = 'rgba(0,0,0, .25)'
 
 	for (let i = 0; i < grid.max; i++) {
 		let offset = i * grid.cell

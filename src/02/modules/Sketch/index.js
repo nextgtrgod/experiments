@@ -45,9 +45,11 @@ class Sketch3D {
 		this.antialias = antialias
 		this.tryWebGL2 = tryWebGL2
 
+		this.radId = null
+
 		this.init()
 
-		window.addEventListener('resize', () => this.setSize())
+		window.addEventListener('resize', () => this.resize())
 	}
 
 	createCamera() {
@@ -194,7 +196,7 @@ class Sketch3D {
 	// 	}
 	// }
 
-	setSize() {
+	resize() {
 		W = window.innerWidth
 		H = window.innerHeight
 
@@ -204,6 +206,8 @@ class Sketch3D {
 		// TiltShift.uniforms.iResolution.value.set(window.innerWidth, H, 1)
 
 		this.renderer.setSize(W, H)
+		this.draw() // safari fix
+
 		// this.composer.setSize(window.innerWidth, H)
 	}
 

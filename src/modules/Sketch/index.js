@@ -9,7 +9,7 @@ let scrollY = window.scrollY * dpi
 let rafId = null
 let timer = null
 
-let cell = (window.innerWidth >= 720 ? 120 : 64) * dpi
+let cell = (window.innerWidth >= 720 ? 150 : 84) * dpi
 let grid = {
 	cell,
 	cols: Math.round(W / cell),
@@ -32,11 +32,7 @@ class Sketch {
 
 		this.init()
 
-		let resizeTimer = null
-		window.onresize = () => {
-			clearTimeout(resizeTimer)
-			resizeTimer = setTimeout(() => this.resize(), 150)
-		}
+		window.addEventListener('resize', () => this.resize())
 
 		window.addEventListener('scroll', () => {
 			scrollY = clamp(0, window.scrollY * dpi)

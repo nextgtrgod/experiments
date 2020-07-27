@@ -5,15 +5,18 @@ class Sketch {
 	constructor(canvas) {
 		this.canvas = canvas
 		this.dpi = window.devicePixelRatio
+		this.radId = null
 
 		this.init()
 
 		let resizeTimer = null
-
-		window.onresize = () => {
+		window.addEventListener('resize', () => {
 			clearTimeout(resizeTimer)
-			resizeTimer = setTimeout(() => this.init(), 150)
-		}
+			resizeTimer = setTimeout(() => {
+				this.init()
+				this.draw() // safari fix
+			}, 150)
+		})
 	}
 
 	init() {
@@ -22,8 +25,6 @@ class Sketch {
 
 		this.canvas.width = this.W
 		this.canvas.height = this.H
-
-		cancelAnimationFrame(this.radId)
 
 		this.ctx = this.canvas.getContext('2d', { alpha: false })
 

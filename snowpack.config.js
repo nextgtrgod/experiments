@@ -9,6 +9,7 @@ module.exports = {
 		port: 8080,
 		open: 'none',
 	},
+	// plugins: ['@snowpack/plugin-webpack'],
 	buildOptions: {
 		clean: true,
 		baseUrl: process.env.NODE_ENV === 'production'
