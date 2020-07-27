@@ -1,10 +1,16 @@
 import rnd from '../../utils/random'
 import Dot from './Dot'
 
+let dpi = window.devicePixelRatio
+let W = window.innerWidth * dpi
+let H = window.innerHeight * dpi
+let threshold = Math.max(W, H) / 3
+
+const PI = Math.PI
+
 class Sketch {
 	constructor(canvas) {
 		this.canvas = canvas
-		this.dpi = window.devicePixelRatio
 		this.radId = null
 
 		this.init()
@@ -20,11 +26,13 @@ class Sketch {
 	}
 
 	init() {
-		this.W = window.innerWidth * this.dpi
-		this.H = window.innerHeight * this.dpi
+		W = window.innerWidth * dpi
+		H = window.innerHeight * dpi
 
-		this.canvas.width = this.W
-		this.canvas.height = this.H
+		threshold = Math.max(W, H) / 3
+
+		this.canvas.width = W
+		this.canvas.height = H
 
 		this.ctx = this.canvas.getContext('2d', { alpha: false })
 
@@ -36,15 +44,12 @@ class Sketch {
 
 		let count = 16
 		let speed = 2
-		this.threshold = this.W / 3
-
-		const PI = Math.PI
 
 		let scale = window.innerWidth >= 600 ? 2 : 1
 	
 		for (let i = 0; i < count; i++) {
 	
-			let s = rnd.range(.5, speed) * this.dpi
+			let s = rnd.range(.5, speed) * dpi
 	
 			let limit = PI/12
 			let angle = rnd.from([
@@ -57,9 +62,9 @@ class Sketch {
 			this.dots.push(
 				new Dot({
 					id: i,
-					x: rnd.range(0, this.W),
-					y: rnd.range(0, this.H),
-					r: rnd.range(3, 5) * scale * this.dpi,
+					x: rnd.range(0, W),
+					y: rnd.range(0, H),
+					r: rnd.range(3, 5) * scale * dpi,
 					v: {
 						x: s * Math.cos(angle),
 						y: s * Math.sin(angle),
@@ -72,11 +77,11 @@ class Sketch {
 	draw() {
 		// clear canvas
 		this.ctx.fillStyle = '#000'
-		this.ctx.fillRect(0, 0, this.W, this.H)
+		this.ctx.fillRect(0, 0, W, H)
 	
 		for (let i = 0; i < this.dots.length; i++) {
 	
-			this.dots[i].update(this.ctx, this.W, this.H, this.dots, this.threshold)
+			this.dots[i].update(this.ctx, W, H, this.dots, threshold)
 	
 			for (let id in this.dots[i].lines) {
 				this.ctx.beginPath()
