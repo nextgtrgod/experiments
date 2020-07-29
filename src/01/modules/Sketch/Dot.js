@@ -68,7 +68,7 @@ class Dot {
 					0: { x: this.x, y: this.y },
 					1: { x: dots[i].x, y: dots[i].y },
 					alpha: (threshold - distance) / (threshold / 2),
-					width: Math.min((threshold / distance), Math.min(this.r, dots[i].r))
+					width: Math.min((threshold / distance), Math.min(this.r, dots[i].r) / 2)
 				}
 			else delete this.lines[dots[i].id]
 		}

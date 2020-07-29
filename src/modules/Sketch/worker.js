@@ -30,7 +30,7 @@ onmessage = ({ data }) => {
 			resize()
 		
 			ctx = canvas.getContext('2d', { alpha: false, desynchronized: true })
-			draw(ctx, { W, H, dpi, scrollY, grid, circle })
+			draw(ctx, { W, H, dpi, scrollY, grid, circle, easing: 1 })
 
 			postMessage({ event: 'ready' })
 		},

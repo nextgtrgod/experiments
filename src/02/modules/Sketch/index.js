@@ -4,24 +4,12 @@ import {
 	WebGLRenderer,
 	Fog,
 	SpotLight,
-	// Vector2,
-	// SpotLightHelper,
-	// SpotLightShadow,
 	HemisphereLight,
 	// GridHelper,
 	// AxesHelper,
 } from 'three'
 
 import { WEBGL } from 'three/examples/jsm/WebGL.js'
-
-// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
-// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
-// import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js'
-// import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-// import { TiltShift } from '../shaders/TiltShift'
-// import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
-
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 // import * as dat from 'dat.gui'
 // const gui = new dat.GUI()
@@ -33,13 +21,13 @@ import { size, count, speed } from './config'
 let W = window.innerWidth
 let H = window.innerHeight
 
-class Sketch3D {
+class Sketch {
 	constructor({
-			node,
-			dpi = window.devicePixelRatio,
-			antialias = false,
-			tryWebGL2 = false,
-		}) {
+		node,
+		dpi = window.devicePixelRatio,
+		antialias = false,
+		tryWebGL2 = false,
+	}) {
 		this.canvas = node
 		this.dpi = dpi
 		this.antialias = antialias
@@ -69,40 +57,10 @@ class Sketch3D {
 		this.light.angle = .5
 		this.light.position.set(0, 120, -size * 5 * count)
 
-		// this.light.shadow.mapSize.width = 1024
-		// this.light.shadow.mapSize.height = 1024
-
-		// let spotLightHelper = new SpotLightHelper( this.light )
-		// this.scene.add( spotLightHelper )
-
-		// this.light.shadow = new SpotLightShadow(new PerspectiveCamera(20, 1, 1, 250))
-		// this.light.castShadow = true
-
 		this.scene.add(
 			this.light,
 			new HemisphereLight(0xD90FFF, 0x1C1385, .25)
 		)
-
-		return
-
-		// gui.add(this.light, 'intensity', 0, 6)
-
-		// let createFolder = (vec3, name) => {
-		// 	let folder = gui.addFolder(name)
-
-		// 	Object.keys(vec3).map(key => {
-		// 		folder.add(vec3, key, -1000, 1000).onChange(updateLight)
-		// 	})
-
-		// 	folder.open()
-		// }
-
-		// createFolder(this.light.position, 'position')
-		// createFolder(this.light.position, 'target')
-
-		// let updateLight = () => {
-		// 	this.light.target.updateMatrixWorld()
-		// }
 	}
 
 	createSegments() {
@@ -149,52 +107,7 @@ class Sketch3D {
 		})
 		this.renderer.setSize(W, H)
 		this.renderer.setPixelRatio( this.dpi )
-		// this.renderer.setClearColor( 0x1D0F33 )
-
-		// this.renderer.shadowMap.enabled = true
-		// this.renderer.shadowMap.type = PCFSoftShadowMap
-
-		// if (process.env.NODE_ENV === 'development') {
-
-		// 	this.controls = new OrbitControls( this.camera, this.renderer.domElement )
-		// 	this.controls.enableDamping = true
-		// 	this.controls.dampingFactor = 0.25
-		// 	this.controls.enableZoom = true
-		// 	this.controls.enableRotate = true
-		// }
-
-		// document.addEventListener('mousemove', this.getMousePos)
-
-		// this.composer = new EffectComposer( this.renderer )
-
-		// let renderPass = new RenderPass( this.scene, this.camera )
-		// this.composer.addPass(renderPass)
-
-		// let bloomPass = new UnrealBloomPass(
-		// 	new Vector2( window.innerWidth, window.innerHeight ),
-		// 	1.5,
-		// 	0.4,
-		// 	0.85,
-		// )
-		// bloomPass.threshold = .25
-		// bloomPass.strength = .25
-		// bloomPass.radius = .5
-
-		// this.composer.addPass( bloomPass )
-
-		// // let glitchPass = new GlitchPass()
-		// // this.composer.addPass( glitchPass )
-
-		// // let tiltShiftPass = new ShaderPass( TiltShift )
-		// // this.composer.addPass( tiltShiftPass )
 	}
-
-	// getMousePos = e => {
-	// 	mouse = {
-	// 		x: -1 + 2 * (e.clientX / window.innerWidth), // -1..1
-	// 		y: -1 + 2 * (e.clientY / window.innerHeight),
-	// 	}
-	// }
 
 	resize() {
 		W = window.innerWidth
@@ -203,12 +116,8 @@ class Sketch3D {
 		this.camera.aspect = W / H
 		this.camera.updateProjectionMatrix()
 
-		// TiltShift.uniforms.iResolution.value.set(window.innerWidth, H, 1)
-
 		this.renderer.setSize(W, H)
 		this.draw() // safari fix
-
-		// this.composer.setSize(window.innerWidth, H)
 	}
 
 	// debug(gl) {
@@ -227,12 +136,7 @@ class Sketch3D {
 			container.position.z += speed
 		})
 
-		// this.controls.update()
-
-		// console.log(this.renderer.info.render.calls)
-
 		this.renderer.render(this.scene, this.camera)
-		// this.composer.render( this.renderer )
 	}
 
 	update() {
@@ -249,4 +153,4 @@ class Sketch3D {
 	}
 }
 
-export default Sketch3D
+export default Sketch

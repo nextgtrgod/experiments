@@ -72,7 +72,7 @@ class Sketch {
 
 		} else {
 			this.ctx = this.canvas.getContext('2d', { alpha: false })
-			draw(this.ctx, { W, H, dpi, scrollY, grid, circle })
+			draw(this.ctx, { W, H, dpi, scrollY, grid, circle, easing: 1 })
 			
 			this.showCanvas()
 		}

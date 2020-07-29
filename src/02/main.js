@@ -1,10 +1,14 @@
 import Sketch from './modules/Sketch'
 
 let canvas = document.getElementById('canvas')
+let options = (new URL(document.location)).searchParams
+let dpi = parseInt(options.get('dpi')) || window.devicePixelRatio
+let antialias = options.get('antialias') === 'false' ? false : true
+
 let sketch = new Sketch({
 	node: canvas,
-	// dpi: 1,
-	antialias: true,
+	dpi,
+	antialias,
 	tryWebGL2: true,
 })
 

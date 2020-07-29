@@ -168,29 +168,31 @@ footer {
 }
 
 a.credits {
-	position: relative;
-	
-	&:before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: var(--color-accent);
-		transform-origin: 0% 100%;
-		transition: transform .3s;
-		backface-visibility: hidden;
-		z-index: -1;
+	& span {
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: var(--color-accent);
+			transform-origin: 0% 100%;
+			transition: transform .3s;
+			backface-visibility: hidden;
+			z-index: -1;
+		}
 	}
 
 	@media (hover) {
-		&:before {
+		& span:before {
 			transform: scaleY(.125);
 		}
 
 		&:hover {
-			&:before {
+			& span:before {
 				transform: scaleY(.9);
 			}
 		}
