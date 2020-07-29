@@ -236,31 +236,31 @@ footer {
 	font-size: 18px;
 }
 
-a.credits {
-	position: relative
-}
-
-a.credits:before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background-color: #FFDC4E;
-		background-color: var(--color-accent);
-		transform-origin: 0% 100%;
-		transition: transform .3s;
-		-webkit-backface-visibility: hidden;
-		        backface-visibility: hidden;
-		z-index: -1;
+a.credits span {
+		position: relative
 	}
 
+a.credits span:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #FFDC4E;
+			background-color: var(--color-accent);
+			transform-origin: 0% 100%;
+			transition: transform .3s;
+			-webkit-backface-visibility: hidden;
+			        backface-visibility: hidden;
+			z-index: -1;
+		}
+
 @media (hover) {
-		a.credits:before {
+		a.credits span:before {
 			transform: scaleY(.125);
 		}
-			a.credits:hover:before {
+			a.credits:hover span:before {
 				transform: scaleY(.9);
 			}
 	}

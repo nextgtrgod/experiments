@@ -4,7 +4,7 @@ import Landscape2 from "./Landscape.js";
 import {size, count, speed} from "./config.js";
 let W = window.innerWidth;
 let H = window.innerHeight;
-class Sketch3D {
+class Sketch {
   constructor({node, dpi = window.devicePixelRatio, antialias = false, tryWebGL2 = false}) {
     this.canvas = node;
     this.dpi = dpi;
@@ -24,7 +24,6 @@ class Sketch3D {
     this.light.angle = 0.5;
     this.light.position.set(0, 120, -size * 5 * count);
     this.scene.add(this.light, new HemisphereLight(14225407, 1840005, 0.25));
-    return;
   }
   createSegments() {
     this.segments = [];
@@ -85,4 +84,4 @@ class Sketch3D {
     cancelAnimationFrame(this.radId);
   }
 }
-export default Sketch3D;
+export default Sketch;
