@@ -1,8 +1,12 @@
 import Sketch2 from "./modules/Sketch/index.js";
 let canvas = document.getElementById("canvas");
+let options = new URL(document.location).searchParams;
+let dpi = parseInt(options.get("dpi")) || window.devicePixelRatio;
+let antialias = options.get("antialias") === "false" ? false : true;
 let sketch = new Sketch2({
   node: canvas,
-  antialias: true,
+  dpi,
+  antialias,
   tryWebGL2: true
 });
 let isIframe = (() => {

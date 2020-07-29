@@ -1,6 +1,6 @@
 import rnd from "../../utils/random.js";
 import Dot2 from "./Dot.js";
-let dpi = window.devicePixelRatio;
+let dpi = parseInt(new URL(document.location).searchParams.get("dpi")) || window.devicePixelRatio;
 let W = window.innerWidth * dpi;
 let H = window.innerHeight * dpi;
 let threshold = Math.max(W, H) / 3;

@@ -37,7 +37,8 @@ onmessage = ({data}) => {
         dpi,
         scrollY,
         grid,
-        circle
+        circle,
+        easing: 1
       });
       postMessage({
         event: "ready"

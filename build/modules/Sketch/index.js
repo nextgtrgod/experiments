@@ -78,7 +78,8 @@ class Sketch {
         dpi,
         scrollY,
         grid,
-        circle
+        circle,
+        easing: 1
       });
       this.showCanvas();
     }
