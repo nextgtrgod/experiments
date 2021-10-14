@@ -1,15 +1,16 @@
 
 let scrollPos = 0
 
-let draw = (ctx, { W, H, dpi, scrollY = 0, grid, circle, easing = .25 }) => {
+let draw = (ctx, { W, H, dpr, scrollY = 0, grid, circle, easing = .25 }) => {
 
+	ctx.lineWidth = 1 / dpr
 	ctx.fillStyle = '#F0F0F0'
 	ctx.fillRect(0, 0, W, H)
 
 	scrollPos += (scrollY - scrollPos) * easing
 
 	ctx.beginPath()
-	ctx.strokeStyle = 'rgba(0,0,0, .25)'
+	ctx.strokeStyle = 'rgba(0,0,0, .125)'
 
 	for (let i = 0; i < grid.max; i++) {
 		let offset = i * grid.cell

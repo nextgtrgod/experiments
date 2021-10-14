@@ -1,21 +1,23 @@
 import draw from './draw'
 
-let canvas = null
-let ctx = null
-let rafId = null
-
 let W = 0
 let H = 0
-let dpi = 1
+let dpr = 1
 let scrollY = 0
-let timer = null
+
+let canvas = null
+let ctx = null
+
+let rafId = 0
+let timer = 0
 
 let grid = null
 let circle = null
 
-let resize = () => {
-	canvas.width = W
-	canvas.height = H
+let setSize = () => {
+	canvas.width = W * dpr
+	canvas.height = H * dpr
+	if (ctx) ctx.scale(dpr, dpr)
 }
 
 onmessage = ({ data }) => {
@@ -25,22 +27,23 @@ onmessage = ({ data }) => {
 		'init': () => {
 			canvas = data.canvas;
 
-			({ W, H, dpi, scrollY, grid, circle }) = options
+			({ W, H, dpr, scrollY, grid, circle } = options)
 
-			resize()
-		
 			ctx = canvas.getContext('2d', { alpha: false, desynchronized: true })
-			draw(ctx, { W, H, dpi, scrollY, grid, circle, easing: 1 })
+
+			setSize()
+
+			draw(ctx, { W, H, dpr, scrollY, grid, circle, easing: 1 })
 
 			postMessage({ event: 'ready' })
 		},
 
 		'resize': () => {
-			({ W, H, scrollY, grid, circle }) = options
+			({ W, H, dpr, scrollY, grid, circle } = options)
 
-			resize()
+			setSize()
 
-			if (!rafId) draw(ctx, { W, H, dpi, scrollY, grid, circle })
+			if (!rafId) draw(ctx, { W, H, dpr, scrollY, grid, circle })
 		},
 
 		'scroll': () => {
@@ -56,7 +59,7 @@ onmessage = ({ data }) => {
 
 let stop = () => {
 	cancelAnimationFrame(rafId)
-	rafId = null
+	rafId = 0
 }
 
 let start = () => {
@@ -66,5 +69,5 @@ let start = () => {
 
 let update = () => {
 	rafId = requestAnimationFrame(() => update())
-	draw(ctx, { W, H, dpi, scrollY, grid, circle })
+	draw(ctx, { W, H, dpr, scrollY, grid, circle })
 }

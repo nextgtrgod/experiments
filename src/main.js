@@ -2,8 +2,8 @@ import VanillaTilt from 'vanilla-tilt'
 import Sketch from './modules/Sketch'
 
 const hasHover = window.matchMedia('(hover)').matches
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-const animate = hasHover && !reduceMotion
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const animate = hasHover && !reducedMotion
 
 let frames = [...document.getElementsByTagName('iframe')]
 
@@ -14,12 +14,16 @@ frames.forEach(frame => {
 		if (!animate) return
 
 		frame.parentNode.addEventListener('mouseenter', () => {
-			frame.contentWindow.postMessage('start')
+			frame.contentWindow.postMessage('start', '*')
 		})
 
 		frame.parentNode.addEventListener('mouseleave', () => {
-			frame.contentWindow.postMessage('stop')
+			frame.contentWindow.postMessage('stop', '*')
 		})
+
+		// frame.parentNode.addEventListener('mousemove', (e) => {
+		// 	console.log(e)
+		// })
 	})
 })
 
@@ -32,8 +36,6 @@ if (animate) {
 			reverse: false,
 			max: 5,
 			speed: 600,
-			// glare: true,
-			// 'max-glare': .25,
 			gyroscope: false,
 		})
 	})

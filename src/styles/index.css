@@ -1,5 +1,5 @@
-@import './src/styles/reset.css';
-@import './src/styles/fonts.css';
+@import './reset.css';
+@import './fonts.css';
 
 @media (prefers-reduced-motion: reduce) {
 	*, ::before, ::after {
@@ -17,7 +17,7 @@
 
 body {
 	display: grid;
-	grid-template-columns: minmax(20px, auto) minmax(auto, 900px) minmax(20px, auto);
+	grid-template-columns: minmax(24px, auto) minmax(auto, 900px) minmax(24px, auto);
 	grid-template-rows: auto;
 
 	padding-left: env(safe-area-inset-left);
@@ -87,6 +87,8 @@ h1 {
 
 
 ul {
+	display: flex;
+	flex-direction: column-reverse;
 	counter-reset: list;
 }
 
@@ -103,12 +105,15 @@ li {
 
 li:nth-child(2n) {
 	justify-content: flex-end;
-	text-align: right;
+
+	@media (min-width: 720px) {
+		text-align: right;
+	}
 }
 
 a.experiment {
 	position: relative;
-	width: min(80%, 600px);
+	width: min(100%, 600px);
 	background-color: #000;
 	box-shadow: 0 0 40px -10px rgb(0 0 0 / 50%);
 
@@ -154,6 +159,7 @@ iframe {
 	pointer-events: none;
 	opacity: 0;
 	transition: opacity .3s;
+	border-radius: 8px;
 
 	&.loaded {
 		opacity: 1;
