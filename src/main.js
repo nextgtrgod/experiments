@@ -20,10 +20,6 @@ frames.forEach(frame => {
 		frame.parentNode.addEventListener('mouseleave', () => {
 			frame.contentWindow.postMessage('stop', '*')
 		})
-
-		// frame.parentNode.addEventListener('mousemove', (e) => {
-		// 	console.log(e)
-		// })
 	})
 })
 
