@@ -159,7 +159,6 @@ iframe {
 	pointer-events: none;
 	opacity: 0;
 	transition: opacity .3s;
-	border-radius: 8px;
 
 	&.loaded {
 		opacity: 1;
