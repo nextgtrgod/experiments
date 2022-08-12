@@ -26,7 +26,7 @@ let circle = {
 	speed: -.75,
 }
 
-class Sketch {
+export default class Sketch {
 	constructor(canvas) {
 		this.canvas = canvas
 
@@ -75,7 +75,7 @@ class Sketch {
 			this.ctx.scale(dpr, dpr)
 
 			draw(this.ctx, { W, H, dpr, scrollY, grid, circle, easing: 1 })
-			
+
 			this.showCanvas()
 		}
 	}
@@ -96,7 +96,7 @@ class Sketch {
 		grid.cell = Math.round(W / grid.cols)
 		grid.max = Math.max(grid.cols, grid.rows)
 		grid.height = grid.rows * grid.cell
-	
+
 		circle.r = Math.max(0, (W - 900) / 2) + 300
 
 		if (this.worker)
@@ -107,7 +107,7 @@ class Sketch {
 
 		this.canvas.width = W * dpr
 		this.canvas.height = H * dpr
-		
+
 		if (!this.ctx) return
 
 		this.ctx.scale(dpr, dpr)
@@ -129,5 +129,3 @@ class Sketch {
 		rafId = 0
 	}
 }
-
-export default Sketch

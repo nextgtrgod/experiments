@@ -8,8 +8,8 @@
 }
 
 :root {
-	--color-bg:		#F0F0F0;
-	--color-text: 	#000;
+	--color-bg: #F0F0F0;
+	--color-text: #000;
 	--color-accent: #FFDC4E;
 
 	--font: 'roboto', monospace;
@@ -121,13 +121,13 @@ a.experiment {
 	transform-style: preserve-3d;
 	transform: perspective(1000px);
 
-	&:before {
+	&::before {
 		content: '';
 		display: block;
 		padding-top: 75%;
 	}
 
-	&:after {
+	&::after {
 		counter-increment: list;
 		content: counter(list, decimal-leading-zero);
 		position: absolute;
@@ -176,7 +176,7 @@ a.credits {
 	& span {
 		position: relative;
 
-		&:before {
+		&::before {
 			content: '';
 			position: absolute;
 			top: 0;
@@ -192,12 +192,12 @@ a.credits {
 	}
 
 	@media (hover) {
-		& span:before {
+		& span::before {
 			transform: scaleY(.125);
 		}
 
 		&:hover {
-			& span:before {
+			& span::before {
 				transform: scaleY(.9);
 			}
 		}

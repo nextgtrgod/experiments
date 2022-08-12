@@ -5,7 +5,7 @@ const hasHover = window.matchMedia('(hover)').matches
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 const animate = hasHover && !reducedMotion
 
-let frames = [...document.getElementsByTagName('iframe')]
+const frames = [...document.getElementsByTagName('iframe')]
 
 frames.forEach(frame => {
 	frame.addEventListener('load', () => {
@@ -25,8 +25,8 @@ frames.forEach(frame => {
 
 // tilt effect
 if (animate) {
-	let links = [...document.getElementsByClassName('experiment')]
-	
+	const links = [...document.getElementsByClassName('experiment')]
+
 	links.forEach(el => {
 		VanillaTilt.init(el, {
 			reverse: false,
@@ -37,5 +37,5 @@ if (animate) {
 	})
 }
 
-let canvas = document.getElementById('bg')
-let sketch = new Sketch(canvas)
+const canvas = document.getElementById('bg')
+const sketch = new Sketch(canvas)
